@@ -1,0 +1,274 @@
+-rw-r--r-- 1 root root   1426 Feb 20 06:35 debug
+-rw-r--r-- 1 root root   1735 Feb 20 06:35 dhclient.conf
+drwxr-xr-x 2 root root   4096 Jun 14 10:39 dhclient-enter-hooks.d
+drwxr-xr-x 2 root root   4096 Jun  9 10:24 dhclient-exit-hooks.d
+-rw-r--r-- 1 root root   3331 Feb 20 07:19 dhcpd6.conf
+-rw-r--r-- 1 root root   4358 Jun 15 09:31 dhcpd.conf
+-rw-r--r-- 1 root root   3496 Jun 13 11:32 dhcpd.conf.copy
+-rw-r--r-- 1 root root 147802 Jun 15 08:40 junk
+
+
+—----------------------------------------------------------------------------------------------------------------------------
+Dhcpd.conf
+
+# dhcpd.conf
+#
+# Sample configuration file for ISC dhcpd
+#
+
+# option definitions common to all supported networks...
+option domain-name "enta.pt";
+option domain-name-servers 192.168.15.182, 192.168.31.1, 172.31.0.1;
+
+default-lease-time 600;
+max-lease-time 7200;
+
+key DHCP_UPDATER {
+         algorithm HMAC-MD5.SIG-ALG.REG.INT;
+         secret pRP5FapFoJ95JEL06sv4PQ==;
+};
+
+# The ddns-updates-style parameter controls whether or not the server will
+# attempt to do a DNS update when a lease is confirmed. We default to the
+# behavior of the version 2 packages ('none', since DHCP v2 didn't
+# have support for DDNS.)
+ddns-update-style standard;
+update-static-leases on;
+# If this DHCP server is the official DHCP server for the local
+# network, the authoritative directive should be uncommented.
+authoritative;
+
+# Use this to send dhcp log messages to a different log file (you also
+# have to hack syslog.conf to complete the redirection).
+#log-facility local7;
+
+# No service will be given on this subnet, but declaring it helps the 
+# DHCP server to understand the network topology.
+
+#subnet 10.152.187.0 netmask 255.255.255.0 {
+#}
+
+# This is a very basic subnet declaration.
+
+#subnet 10.254.239.0 netmask 255.255.255.224 {
+#  range 10.254.239.10 10.254.239.20;
+#  option routers rtr-239-0-1.example.org, rtr-239-0-2.example.org;
+#}
+
+# This declaration allows BOOTP clients to get dynamic addresses,
+# which we don't really recommend.
+
+#subnet 10.254.239.32 netmask 255.255.255.224 {
+#  range dynamic-bootp 10.254.239.40 10.254.239.60;
+#  option broadcast-address 10.254.239.31;
+#  option routers# A slightly different configuration for an internal subnet.
+#subnet 10.5.5.0 netmask 255.255.255.224 {
+#  range 10.5.5.26 10.5.5.30;
+#  option domain-name-servers ns1.internal.example.org;
+#  option domain-name "internal.example.org";
+#  option routers 10.5.5.1;
+#  option broadcast-address 10.5.5.31;
+#  default-lease-time 600;
+#  max-lease-time 7200;
+#}
+
+# Hosts which require special configuration options can be listed in
+# host statements.   If no address is specified, the address will be
+# allocated dynamically (if possible), but the host-specific information
+# will still come from the host declaration.
+
+#host passacaglia {
+#  hardware ethernet 0:0:c0:5d:bd:95;
+#  filename "vmunix.passacaglia";
+#  server-name "toccata.example.com";
+#}
+
+# Fixed IP addresses can also be specified for hosts.   These addresses
+# should not also be listed as being available for dynamic assignment.
+# Hosts for which fixed IP addresses have been specified can boot using
+# BOOTP or DHCP.   Hosts for which no fixed address is specified can only
+# be booted with DHCP, unless there is an address range on the subnet
+# to which a BOOTP client is connected which has the dynamic-bootp flag
+# set.
+#host fantasia {
+#  hardware ethernet 08:00:07:26:c0:a5;
+#  fixed-address fantasia.example.com;
+#}
+
+# You can declare a class of clients and then do address allocation
+# based on that.   The example below shows a case where all clients
+# in a certain class get addresses on the 10.17.224/24 subnet, and all
+# other clients get addresses on the 10.0.29/24 subnet.
+
+#class "foo" {
+#  match if substring (option vendor-class-identifier, 0, 4) = "SUNW";
+#}
+
+#shared-network 224-29 {
+#  subnet 10.17.224.0 netmask 255.255.255.0 {
+#    option routers rtr-224.example.org;
+#  }
+#  subnet 10.0.29.0 netmask 255.255.255.0 {
+#    option routers rtr-29.example.org;
+#  }
+#  pool {
+#    allow members of "foo";
+#    range 10.17.224.10 10.17.224.250;
+#  }
+#  pool {
+#    deny members of "foo";
+#    range 10.0.29.10 10.0.29.230;
+#  }
+#}
+
+subnet 192.168.31.0 netmask 255.255.255.0 {
+  range 192.168.31.128 192.168.31.191;
+  option routers 192.168.31.1;
+  option broadcast-address 192.168.31.255;
+}
+
+subnet 172.31.0.0 netmask 255.255.255.0 {
+  range 172.31.0.64 172.31.0.95;
+  option routers 172.31.0.1;
+  option broadcast-address 172.31.0.255;
+}
+
+host 172.31.0.100 {
+  hardware ethernet 00:50:56:86:7c:cf;
+  fixed-address 172.31.0.100;
+  option routers 172.31.0.1;
+  option broadcast-address 172.31.0.255;
+}
+
+zone enta.pt {
+         primary 127.0.0.1;
+         key DHCP_UPDATER;
+}
+
+zone 31.172.in-addr.arpa. {
+         primary 127.0.0.1;
+         key DHCP_UPDATER;
+}
+
+zone 31.168.192.in-addr.arpa. {
+         primary 127.0.0.1;
+         key DHCP_UPDATER;
+}
+
+
+
+—----------------------------------------------------------------------------------------------------------------------------
+Dhclient.conf
+
+# Configuration file for /sbin/dhclient.
+#
+# This is a sample configuration file for dhclient. See dhclient.conf's
+#       man page for more information about the syntax of this file
+#       and a more comprehensive list of the parameters understood by
+#       dhclient.
+#
+# Normally, if the DHCP server provides reasonable information and does
+#       not leave anything out (like the domain name, for example), then
+#       few changes must be made to this file, if any.
+#
+
+option rfc3442-classless-static-routes code 121 = array of unsigned integer 8;
+
+send host-name = gethostname();
+request subnet-mask, broadcast-address, time-offset, routers,
+        domain-name, domain-name-servers, domain-search, host-name,
+        dhcp6.name-servers, dhcp6.domain-search, dhcp6.fqdn, dhcp6.sntp-servers,
+        netbios-name-servers, netbios-scope, interface-mtu,
+        rfc3442-classless-static-routes, ntp-servers;
+
+#send dhcp-client-identifier 1:0:a0:24:ab:fb:9c;
+#send dhcp-lease-time 3600;
+#supersede domain-name "fugue.com home.vix.com";
+#prepend domain-name-servers 127.0.0.1;
+#require subnet-mask, domain-name-servers;
+#timeout 60;
+#retry 60;
+#reboot 10;
+#select-timeout 5;
+#initial-interval 2;
+#script "/sbin/dhclient-script";
+#media "-link0 -link1 -link2", "link0 link1";
+#reject 192.33.137.209;
+
+#alias {
+#  interface "eth0";
+#  fixed-address 192.5.5.213;
+#  option subnet-mask 255.255.255.255;
+#}
+
+#lease {
+#  interface "eth0";
+#  fixed-address 192.33.137.200;
+#  medium "link0 link1";
+#  option host-name "andare.swiftmedia.com";
+#  option subnet-mask 255.255.255.0;
+#  option broadcast-address 192.33.137.255;
+#  option routers 192.33.137.250;
+#  option domain-name-servers 127.0.0.1;
+#  renew 2 2000/1/12 00:00:01;
+#  rebind 2 2000/1/12 00:00:01;
+#}
+
+
+
+—----------------------------------------------------------------------------------------------------------------------------
+
+SERVIDOR PRINCIPAL
+omapi-port 7911;
+omapi-key DHCP_FAILOVER;
+
+key DHCP_FAILOVER {
+        algorithm hmac-sha512;
+        secret "emo/juNfRfG5gQSGbmoYQ/zinctXoYPaYjlxKnYtoG5iPxofDCshLyS66q32qPpqqe6KpMl4q5HsgN0Q/VVBBw==";
+}  
+
+failover peer "failover-example" {
+        primary;
+        address 192.168.31.1;
+        port 519;
+        peer address 192.168.31.2;
+        peer port 520;
+        max-response-delay 60;
+        max-unacked-updates 10;
+        mclt 3600;
+        split 256;
+        load balance max seconds 3;
+}
+
+subnet 192.168.31.0 netmask 255.255.255.0 {
+  option routers 192.168.31.1;
+  option broadcast-address 192.168.31.255;
+  pool {
+        failover peer "failover-example";
+        range 192.168.31.128 192.168.31.191;
+  }
+}
+
+SERVIDOR SECUNDÁRIO
+omapi-port 7911;
+omapi-key DHCP_FAILOVER;
+
+key DHCP_FAILOVER {
+        algorithm hmac-sha512;
+        secret "emo/juNfRfG5gQSGbmoYQ/zinctXoYPaYjlxKnYtoG5iPxofDCshLyS66q32qPpqqe6KpMl4q5HsgN0Q/VVBBw==";
+}
+
+failover peer "failover-example" {
+        secondary;
+        address 192.168.31.2;
+        port 520;
+        peer address 192.168.31.1;
+        peer port 519;
+        max-response-delay 60;
+        max-unacked-updates 10;
+        load balance max seconds 3;
+}
+
+GERAR CHAVE
+tsig-keygen -a hmac-sha512 DHCP_FAILOVER
+
