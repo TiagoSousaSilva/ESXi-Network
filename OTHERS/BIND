@@ -1,0 +1,102 @@
+-rw-r--r-- 1 bind bind 420 Jun 15 09:34 db.172.31.enta.pt
+-rw-r--r-- 1 root bind 291 Jun 14 10:28 db.192.168.15.enta.pt
+-rw-r--r-- 1 bind bind 396 Jun 15 09:10 db.192.168.31.enta.pt
+-rw-r--r-- 1 bind bind 839 Jun 15 09:34 db.enta.pt
+-rw-r--r-- 1 bind bind 221 Jun 14 09:37 managed-keys.bind
+
+—----------------------------------------------------------------------------------------------------------------------------
+Db.172.31.enta.pt
+$ORIGIN .
+$TTL 604800     ; 1 week
+31.172.in-addr.arpa     IN SOA  enta.pt. root.enta.pt. (
+                                2          ; serial
+                                604800     ; refresh (1 week)
+                                86400      ; retry (1 day)
+                                2419200    ; expire (4 weeks)
+                                604800     ; minimum (1 week)
+                                )
+                        NS      enta.pt.
+$ORIGIN 0.31.172.in-addr.arpa.
+1                       PTR     ns.enta.pt.
+                        PTR     enta.pt.
+                        PTR     tiagortr.enta.pt.31.172.in-addr.arpa.
+$TTL 300        ; 5 minutes
+100                     PTR     debian.enta.pt.
+
+—----------------------------------------------------------------------------------------------------------------------------
+Db.192.168.15.enta.pt
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     enta.pt. root.enta.pt. (
+                              1         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      enta.pt.
+171     IN      PTR     enta.pt.
+171     IN      PTR     tiagortr.enta.pt.
+
+—----------------------------------------------------------------------------------------------------------------------------
+
+Db.192.168.31.enta.pt
+$ORIGIN .
+$TTL 604800     ; 1 week
+31.168.192.in-addr.arpa IN SOA  enta.pt. root.enta.pt. (
+                                12         ; serial
+                                604800     ; refresh (1 week)
+                                86400      ; retry (1 day)
+                                2419200    ; expire (4 weeks)
+                                604800     ; minimum (1 week)
+                                )
+                        NS      enta.pt.
+$ORIGIN 31.168.192.in-addr.arpa.
+1                       PTR     enta.pt.
+                        PTR     tiagortr.enta.pt.
+$TTL 300        ; 5 minutes
+128                     PTR     DESKTOP-SB9ATGD.enta.pt.
+
+
+—----------------------------------------------------------------------------------------------------------------------------
+Db.enta.pt
+
+$ORIGIN .
+$TTL 604800     ; 1 week
+enta.pt                 IN SOA  enta.pt. root.enta.pt. (
+                                19         ; serial
+                                604800     ; refresh (1 week)
+                                86400      ; retry (1 day)
+                                2419200    ; expire (4 weeks)
+                                604800     ; minimum (1 week)
+                                )
+                        NS      ns.enta.pt.
+                        NS      enta.pt.
+                        A       172.31.0.1
+                        A       192.168.15.182
+                        A       192.168.31.1
+                        MX      10 smtp.enta.pt.
+$ORIGIN enta.pt.
+$TTL 300        ; 5 minutes
+debian                  A       172.31.0.100
+                        DHCID   ( AAABq6r4yP6+X59nQEfnpyloEiIiLc5brrAX1rks5aBO
+                                YnA= ) ; 0 1 32
+DESKTOP-SB9ATGD         A       192.168.31.128
+                        DHCID   ( AAEBQr83CQpObARFOFTgVOHKqeYYLZhYxmg9U6OItDWB
+                                KHg= ) ; 1 1 32
+$TTL 604800     ; 1 week
+imap                    A       172.31.0.100
+ns                      A       172.31.0.1
+                        A       192.168.15.1
+                        A       192.168.31.1
+pop                     A       172.31.0.100
+smtp                    A       172.31.0.100
+tiagodmz                A       172.31.0.100
+tiagortr                A       172.31.0.1
+                        A       192.168.15.1
+                        A       192.168.31.1
+www                     CNAME   tiagodmz
+
+
