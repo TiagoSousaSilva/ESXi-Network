@@ -1,5 +1,5 @@
-root@tiagortr:/etc/bind# ls -l
-total 52
+/etc/bind
+
 -rw-r--r-- 1 root root 1991 Jan 25 14:22 bind.keys
 -rw-r--r-- 1 root root  237 Jan 25 14:22 db.0
 -rw-r--r-- 1 root root  271 Jan 25 14:22 db.127
