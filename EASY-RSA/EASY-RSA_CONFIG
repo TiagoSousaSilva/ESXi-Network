@@ -1,4 +1,6 @@
- openssl x509 -in ./pki/ca.crt -text -noout  ||| see if the cert if right
+/etc/easy-rsa
+
+openssl x509 -in ./pki/ca.crt -text -noout  ||| see if the cert if right
 
   398  apt install easy-rsa 
   399  cd /etc
