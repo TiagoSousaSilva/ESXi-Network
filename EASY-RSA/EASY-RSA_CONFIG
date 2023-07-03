@@ -1,0 +1,71 @@
+ openssl x509 -in ./pki/ca.crt -text -noout  ||| see if the cert if right
+
+  398  apt install easy-rsa 
+  399  cd /etc
+  400  cp -R /usr/share/easy-rsa/ .
+  401  cd easy-rsa/
+  402  cp vars.example vars
+  403  nano vars
+  404  ./easyrsa init-pki
+  405  ./easyrsa help build-ca
+  406  ./easyrsa build-ca 
+  407  ./easyrsa build-ca nopass
+  408  rm -fr pki
+  409  nano vars
+  410  ./easyrsa init-pki
+  411  ./easyrsa build-ca nopass
+  412  ./easyrsa build-ca nopass
+  413  nano vars
+  414  rm -fr pki
+  415  nano vars
+  416  ./easyrsa build-ca nopass
+  417  nano vars
+  418  ./easyrsa init-pki
+  419  ./easyrsa --req-c=PT --req-org="Firma Tradycyjna Polska Sp. z o.o." buil-ca nopass
+  420  ./easyrsa --req-c=PT --req-org="Firma Tradycyjna Polska Sp. z o.o." build-ca nopass
+  421  ls -l
+  422  rm -fr pki
+  423  rm -fr vars
+  424  rm -fr pki
+  425  ls -l
+  426  cp vars.example vars
+  427  nano vars
+  428  nano ./easyrsa 
+  429  ./easyrsa build-ca nopass
+  430  ./easyrsa init-pki
+  431  ./easyrsa build-ca nopass
+  432  openssl x509 -in ./pki/ca.crt -text -noout
+  433  ./easyrsa gen-req www.firmatpolska.pl nopass
+  434  rm -fr pki
+  435  ./easyrsa init-pki
+  436  ./easyrsa build-ca nopass
+  437  ./easyrsa --subject-alt-name="DNS:www.firmatpolska.pl" gen-req www.firmatpolska.pl nopass
+  438  ./easyrsa sign-req server www.firmatpolska.pl
+  439  history
+  440  cd pki
+  441  scp ca.crt debian@172.31.0.100:
+  442  ls -l
+  443  cd issued
+  444  ls -l
+  445  cd ..
+  446  find . |grep firma
+  447  cc..
+  448  cd ..
+  449  rm -fr pki
+  450  ./easyrsa init-pki
+  451  ./easyrsa build-ca nopass
+  452  ./easyrsa build-server-full blabla.com nopass
+  453  ./easyrsa --subject-alt-name="DNS:www.firmatpolska.pl" gen-req www.firmatpolska.pl nopass
+  454  ./easyrsa sign-req server www.firmatpolska.pl
+  455  ping 172.31.0.100
+  456  scp ca.crt debian@172.31.0.100:
+  457  cd pki/
+  458  cd issued/
+  459  ls -l
+  460  scp www.firmatpolska.pl.crt debian@172.31.0.100:
+  461  scp www.firmatpolska.pl.crt debian@172.31.0.100:
+  462  cd ..
+  463  ls -l
+  464  scp ca.crt debian@172.31.0.100
+  465  scp private/www.firmatpolska.pl.key debian@172.31.0.100
+  466  scp private/www.firmatpolska.pl.key debian@172.31.0.100:
