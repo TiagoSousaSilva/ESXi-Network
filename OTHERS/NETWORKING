@@ -1,0 +1,60 @@
+drwxr-xr-x 2 root root 4096 Jun 14 10:39 if-down.d
+drwxr-xr-x 2 root root 4096 Nov  4  2020 if-post-down.d
+drwxr-xr-x 2 root root 4096 Jun  9 10:30 if-pre-up.d
+drwxr-xr-x 2 root root 4096 Jun 14 10:39 if-up.d
+-rw-r--r-- 1 root root  999 Jun 14 10:36 interfaces
+drwxr-xr-x 2 root root 4096 Nov  4  2020 interfaces.d
+
+—----------------------------------------------------------------------------------------------------------------------------
+Interfaces
+
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug ens192
+iface ens192 inet static
+        address 192.168.15.182/24	
+        gateway 192.168.15.1
+        # dns-* options are implemented by the resolvconf package, if installed
+        dns-nameservers 192.168.15.182
+        dns-search enta.pt
+
+# The primary network interface
+allow-hotplug ens224
+iface ens224 inet static
+        address 192.168.31.1/24
+        # dns-* options are implemented by the resolvconf package, if installed
+        dns-nameservers 192.168.31.1
+        dns-search enta.pt
+
+# The primary network interface
+allow-hotplug ens256
+iface ens256 inet static
+        address 172.31.0.1/24
+        # dns-* options are implemented by the resolvconf package, if installed
+        dns-nameservers 172.31.0.1
+        dns-search enta.pt
+
+—----------------------------------------------------------------------------------------------------------------------------
+
+IN DMZ
+
+ This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+allow-hotplug ens192
+iface ens192 inet dhcp
+        gateway 172.31.0.1
