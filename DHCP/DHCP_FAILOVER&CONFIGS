@@ -1,3 +1,5 @@
+/etc/dhcp
+
 -rw-r--r-- 1 root root   1426 Feb 20 06:35 debug
 -rw-r--r-- 1 root root   1735 Feb 20 06:35 dhclient.conf
 drwxr-xr-x 2 root root   4096 Jun 14 10:39 dhclient-enter-hooks.d
