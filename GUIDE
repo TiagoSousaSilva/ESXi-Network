@@ -1,0 +1,35 @@
+First Step:
+
+Creating 2 Debian machines and 1 Windows10 machine
+
+Second Step:
+
+Change the interfaces
+
+Third Step:
+
+Upgrade and update 
+
+nano /etc/sysctl.conf and enable ip_foward=1 and use “sysctl -p”
+
+Do nftables.conf
+
+nano /etc/network/interfaces
+
+DHCP Install - apt install isc-dhcp-server
+DNS Install - apt install bind9 bind9-dnsutils bind9-doc bind9-utils bind9utils
+
+Commands for dhcp
+
+/renew /release in windows
+Dhcp -r dhcp -v
+
+
+Use python3 to send ca.crt and all other crt to the windows and dmz machines
+
+
+
+
+
+
+
