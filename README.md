@@ -1,6 +1,6 @@
-# Project_2
+# ESXi Network
 ```
-The ESXi project involved setting up a virtual network environment with four machines: Main, DHCPcli, DHCPFailover,
+The "ESXi Network" project involved setting up a virtual network environment with four machines: Main, DHCPcli, DHCPFailover,
 and Windows.
 
 Main served as the primary server, hosting multiple functionalities. It operated as a DHCP server, providing IP
@@ -16,6 +16,6 @@ In case Main experienced any downtime, DHCPFailover, another Debian system on th
 acted as a failover to ensure continuous availability and smooth operations.
 ```
 
-The project demonstrates the configuration of virtual networks, server roles, email services, DNS, web servers, and 
+The project "ESXi Network" demonstrates the configuration of virtual networks, server roles, email services, DNS, web servers, and 
 failover mechanisms, all within the ESXi environment, with a specific focus on the interactions between Main, DHCPcli, 
 DHCPFailover, and Windows.
